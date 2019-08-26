@@ -1,5 +1,5 @@
 # Applied Data Science from University of Michigan - Coursera
-Specialization
+Specialization: https://www.coursera.org/specializations/data-science-python
 
 ## TODO
 - [ ] Course 1: Introduction to Data Science with Python
