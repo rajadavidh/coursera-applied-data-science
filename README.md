@@ -15,11 +15,11 @@ Specialization: https://www.coursera.org/specializations/data-science-python
 ## Download whole directory (optional)
 Source: https://github.com/jupyter/notebook/issues/3092
 
-> Content of dog-project folder are-
-> 1>Dogproject.ipynb
-> 2>dogimages folder
-> .
-> .some other usefull files
+> Content of dog-project folder are:
+> 
+> 1. Dogproject.ipynb
+> 2. dogimages folder
+> 3. some other usefull files
 
 Now you want to zip the dog-project folder.
 
