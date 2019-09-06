@@ -32,19 +32,12 @@ Now you want to zip the dog-project folder.
 ## Course 1: Introduction to Data Science with Python
 https://www.coursera.org/learn/python-data-analysis
 
-### Interesting Quiz question
-Given a 6x6 NumPy array r, which of the following options would slice the shaded elements?
+View interesting quiz solution in:
 
-Shaded elements is `[0, 7, 14, 21, 28, 35]`
-```python
-import numpy as np
-r = np.array([[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11], [12, 13, 14, 15, 16, 17], [18, 19, 20, 21, 22, 23], [24, 25, 26, 27, 28, 29], [30, 31, 32, 33, 34, 35]])
-```
-
-Solution:
-```python
-r.reshape(36)[::7]
-```
+* [week#1](/course1-intro-to-data-science/week1)
+* [week#2](/course1-intro-to-data-science/week2)
+* [week#3](/course1-intro-to-data-science/week3)
+* [week#4](/course1-intro-to-data-science/week4)
 
 ## Course 2: Applied Plotting, Charting & Data Representation
 https://www.coursera.org/learn/python-plotting
