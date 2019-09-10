@@ -166,10 +166,108 @@ print(first)
 ```
 
 ### 5. Kesimpulan
-Dalam memilih baris dan kolom tergantung pada kasus mana yang cocok
+Dalam memilih baris dan kolom tergantung pada kasus mana yang cocok. Ini ada contoh perbandingan dari [jawaban dalam Stackoverflow](https://stackoverflow.com/questions/17071871/select-rows-from-a-dataframe-based-on-values-in-a-column-in-pandas)
 
-Ini ada [jawaban dari Stackoverflow](https://stackoverflow.com/questions/17071871/select-rows-from-a-dataframe-based-on-values-in-a-column-in-pandas) yang bisa kita jadikan Cheatsheet:
+Pertanyaannya: Mencari terjemahan perintah SQL berikut ke dalam bentuk syntax panda.
+```sqlite-psql
+SELECT *
+FROM table
+WHERE colume_name = some_value
+```
 
+#### Jawaban#1 - Membandingkan hasil dengan jumlah dataframe yang sedikit
+Contoh tabel:
+```
+In [76]: df.iloc[np.where(df.A.values=='foo')]
+Out[76]: 
+     A      B  C   D
+0  foo    one  0   0
+2  foo    two  2   4
+4  foo    two  4   8
+6  foo    one  6  12
+7  foo  three  7  14
+```
+
+Contoh perbandingan hasil:
+```python
+In [68]: %timeit df.iloc[np.where(df.A.values=='foo')]  # fastest
+1000 loops, best of 3: 380 µs per loop
+
+In [71]: %timeit df.loc[df['A'].isin(['foo'])]
+1000 loops, best of 3: 562 µs per loop
+
+In [69]: %timeit df.loc[df['A'] == 'foo']
+1000 loops, best of 3: 745 µs per loop
+
+In [72]: %timeit df[df.A=='foo']
+1000 loops, best of 3: 796 µs per loop
+
+In [74]: %timeit df.query('(A=="foo")')  # slowest
+1000 loops, best of 3: 1.71 ms per loop
+```
+
+#### Jawaban#2 - Membandingkan hasil dengan jumlah dataframe yang banyak (pakai referensi ini)
+Kalau dari contoh diatas, yang tercepat adalah memakai fungsi [numpy.where()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html).
+
+Tapi ada statement kalau fungsi `.query()` yang justru lebih cepat. Tapi ini untuk kasus dengan dataset yang besar:
+> However, if you pay attention to the timings below, for large data, the query is very efficient. More so than the standard approach and of similar magnitude as my best suggestion.
+
+Contoh perbandingan hasil dengan beberapa fungsi:
+Kolom `10 - 30000` melambangkan jumlah dataframe
+```
+res.div(res.min())
+
+                         10        30        100       300       1000      3000      10000     30000
+mask_standard         2.156872  1.850663  2.034149  2.166312  2.164541  3.090372  2.981326  3.131151
+mask_standard_loc     1.879035  1.782366  1.988823  2.338112  2.361391  3.036131  2.998112  2.990103
+mask_with_values      1.010166  1.000000  1.005113  1.026363  1.028698  1.293741  1.007824  1.016919
+mask_with_values_loc  1.196843  1.300228  1.000000  1.000000  1.038989  1.219233  1.037020  1.000000
+query                 4.997304  4.765554  5.934096  4.500559  2.997924  2.397013  1.680447  1.398190
+xs_label              4.124597  4.272363  5.596152  4.295331  4.676591  5.710680  6.032809  8.950255
+mask_with_isin        1.674055  1.679935  1.847972  1.724183  1.345111  1.405231  1.253554  1.264760
+mask_with_in1d        1.000000  1.083807  1.220493  1.101929  1.000000  1.000000  1.000000  1.144175
+```
+^ Untuk dataframe berjumlah `30000`, fungsi `.query()` berada peringkat 5 tercepat.
+
+#### Metode yang tercepat adalah 'mask_with_values' dalam kondisi kasus apapun
+Penerapannya adalah berikut:
+```python
+mask = df['A'].values == 'foo'
+df[mask]
+```
+
+Contoh penerapan fungsi lainnya:
+```python
+def mask_standard(df):
+    mask = df['A'] == 'foo'
+    return df[mask]
+
+def mask_standard_loc(df):
+    mask = df['A'] == 'foo'
+    return df.loc[mask]
+
+def mask_with_values(df):
+    mask = df['A'].values == 'foo'
+    return df[mask]
+
+def mask_with_values_loc(df):
+    mask = df['A'].values == 'foo'
+    return df.loc[mask]
+
+def query(df):
+    return df.query('A == "foo"')
+
+def xs_label(df):
+    return df.set_index('A', append=True, drop=False).xs('foo', level=-1)
+
+def mask_with_isin(df):
+    mask = df['A'].isin(['foo'])
+    return df[mask]
+
+def mask_with_in1d(df):
+    mask = np.in1d(df['A'].values, ['foo'])
+    return df[mask]
+```
 
 ## Duplikat hanya kolom - week2 - [referensi](https://stackoverflow.com/questions/34682828/extracting-specific-selected-columns-to-new-dataframe-as-a-copy)
 ```python
