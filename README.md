@@ -32,6 +32,8 @@ Now you want to zip the dog-project folder.
 ## Course 1: Introduction to Data Science with Python
 https://www.coursera.org/learn/python-data-analysis
 
+[Read more on lesson learned from Course 1](/course1-intro-to-data-science/README.md)
+
 View interesting quiz solution in:
 
 * [week#1](/course1-intro-to-data-science/week1)
@@ -58,3 +60,8 @@ TODO
 https://www.coursera.org/learn/python-social-network-analysis
 
 TODO
+
+## Additional course resources
+* [Python Docs](https://docs.python.org/3/) (for general Python documentation)
+* [Python Classes Docs](https://docs.python.org/3.5/tutorial/classes.html)
+* Pandas on [Stack Overflow](http://stackoverflow.com/questions/tagged/pandas)
