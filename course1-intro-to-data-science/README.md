@@ -363,7 +363,7 @@ sub ='a'
 data["Indexes"]= data["Name"].str.find(sub)
 ```
 
-### Ternyata operasi SQL bisa kita operasikan melalui fungsi bawaan panda - week3
+## Ternyata operasi SQL bisa kita operasikan melalui fungsi bawaan panda - week3
 Referensi ini kita ambil dari jupyter notebook di minggu ketiga.
 
 Contoh tabelnya:
@@ -382,35 +382,35 @@ print()
 print(student_df.head())
 ```
 
-#### Melakukan Outer join
+### Melakukan Outer join
 Kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
 
 ```python
 pd.merge(staff_df, student_df, how='outer', left_index=True, right_index=True)
 ```
 
-#### Melakukan Inner join
+### Melakukan Inner join
 Sama dengan Outer join diatas, syntaks berikut kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
 
 ```python
 pd.merge(staff_df, student_df, how='inner', left_index=True, right_index=True)
 ```
 
-#### Melakukan Left join
+### Melakukan Left join
 Sama dengan Outer join diatas, syntaks berikut kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
 
 ```python
 pd.merge(staff_df, student_df, how='left', left_index=True, right_index=True)
 ```
 
-#### Melakukan Right join
+### Melakukan Right join
 Sama dengan Outer join diatas, syntaks berikut kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
 
 ```python
 pd.merge(staff_df, student_df, how='right', left_index=True, right_index=True)
 ```
 
-#### Kalau kita ingin menggabungkan tabel bukan dengan indeks melainkan dengan nama kolom, kita pakai `left_on` atau `right_on`
+### Kalau kita ingin menggabungkan tabel bukan dengan indeks melainkan dengan nama kolom, kita pakai `left_on` atau `right_on`
 Contohnya menggabungkan dengan memasangkan hanya 1 kolom:
 
 ```python
