@@ -364,4 +364,70 @@ data["Indexes"]= data["Name"].str.find(sub)
 ```
 
 ### Ternyata operasi SQL bisa kita operasikan melalui fungsi bawaan panda - week3
-TODO
+Referensi ini kita ambil dari jupyter notebook di minggu ketiga.
+
+Contoh tabelnya:
+```python
+import pandas as pd
+staff_df = pd.DataFrame([{'Name': 'Kelly', 'Role': 'Director of HR'},
+                         {'Name': 'Sally', 'Role': 'Course liasion'},
+                         {'Name': 'James', 'Role': 'Grader'}])
+staff_df = staff_df.set_index('Name')
+student_df = pd.DataFrame([{'Name': 'James', 'School': 'Business'},
+                           {'Name': 'Mike', 'School': 'Law'},
+                           {'Name': 'Sally', 'School': 'Engineering'}])
+student_df = student_df.set_index('Name')
+print(staff_df.head())
+print()
+print(student_df.head())
+```
+
+#### Melakukan Outer join
+Kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
+
+```python
+pd.merge(staff_df, student_df, how='outer', left_index=True, right_index=True)
+```
+
+#### Melakukan Inner join
+Sama dengan Outer join diatas, syntaks berikut kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
+
+```python
+pd.merge(staff_df, student_df, how='inner', left_index=True, right_index=True)
+```
+
+#### Melakukan Left join
+Sama dengan Outer join diatas, syntaks berikut kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
+
+```python
+pd.merge(staff_df, student_df, how='left', left_index=True, right_index=True)
+```
+
+#### Melakukan Right join
+Sama dengan Outer join diatas, syntaks berikut kita asumsikan indeks pada tabel sebelah kiri identik dengan tabel sebelah kanan sehingga kita pakai atribut `left_index` dan `right_index`
+
+```python
+pd.merge(staff_df, student_df, how='right', left_index=True, right_index=True)
+```
+
+#### Kalau kita ingin menggabungkan tabel bukan dengan indeks melainkan dengan nama kolom, kita pakai `left_on` atau `right_on`
+Contohnya menggabungkan dengan memasangkan hanya 1 kolom:
+
+```python
+staff_df = staff_df.reset_index()
+student_df = student_df.reset_index()
+pd.merge(staff_df, student_df, how='left', left_on='Name', right_on='Name')
+```
+
+Contohnya menggabungkan dengan memasangkan lebih dari 1 kolom:
+```python
+staff_df = pd.DataFrame([{'First Name': 'Kelly', 'Last Name': 'Desjardins', 'Role': 'Director of HR'},
+                         {'First Name': 'Sally', 'Last Name': 'Brooks', 'Role': 'Course liasion'},
+                         {'First Name': 'James', 'Last Name': 'Wilde', 'Role': 'Grader'}])
+student_df = pd.DataFrame([{'First Name': 'James', 'Last Name': 'Hammond', 'School': 'Business'},
+                           {'First Name': 'Mike', 'Last Name': 'Smith', 'School': 'Law'},
+                           {'First Name': 'Sally', 'Last Name': 'Brooks', 'School': 'Engineering'}])
+staff_df
+student_df
+pd.merge(staff_df, student_df, how='inner', left_on=['First Name','Last Name'], right_on=['First Name','Last Name'])
+```
