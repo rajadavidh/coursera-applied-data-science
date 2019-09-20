@@ -27,7 +27,6 @@ df = pd.DataFrame({"A":[12, 4, 5, 44, 1],
 
 # Querying
 ## Cara terbaik dalam mengambil kolom atau baris data - [referensi](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
-TODO
 Indexing adalah metode pemotongan data (slicing) dari tabel induk menjadi tabel dengan baris / kolom yang lebih sedikit.
 
 Ada 4 metode indexing pada panda: 
@@ -365,3 +364,4 @@ data["Indexes"]= data["Name"].str.find(sub)
 ```
 
 ### Ternyata operasi SQL bisa kita operasikan melalui fungsi bawaan panda - week3
+TODO
