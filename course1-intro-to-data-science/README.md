@@ -431,3 +431,23 @@ staff_df
 student_df
 pd.merge(staff_df, student_df, how='inner', left_on=['First Name','Last Name'], right_on=['First Name','Last Name'])
 ```
+
+## Pandorable: Idiom untuk panda
+Menggunakan teknik pemanggilan metode yang berantai (pandorable method chaining):
+
+```python
+(df.where(df['SUMLEV']==50)
+    .dropna()
+    .set_index(['STNAME','CTYNAME'])
+    .rename(columns={'ESTIMATESBASE2010': 'Estimates Base 2010'}))
+```
+
+Menggunakan metode coding python tradisional:
+
+```python
+df = df[df['SUMLEV']==50]
+df.set_index(['STNAME','CTYNAME'], inplace=True)
+df.rename(columns={'ESTIMATESBASE2010': 'Estimates Base 2010'})
+```
+
+Kedua metode diatas memberi hasil yang sama, tetapi untuk waktu eksekusi yang lebih cepat adalah menggunakan **metode coding python tradisional**.
