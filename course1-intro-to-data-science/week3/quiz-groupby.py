@@ -69,6 +69,11 @@ for group, frame in df.groupby('Category'):
 
 # Solution
 print(df.groupby('Category').apply(lambda df,a,b: sum(df[a] * df[b]), 'Weight (oz.)', 'Quantity'))
+# Fungsi `.apply()` melakukan proses pada setiap item dalam dataframe
+# Ini mirip dengan fungsi `.map()` dalam python (liat notebook week#1).
+# Intinya dalam ketika menggunakan map(), fungsi yang kita jadikan sebagai input
+# akan menjadi acuan eksekusi dari setiap item dalam list
+
 
 # Or alternatively without using a lambda:
 def totalweight(df, w, q):
